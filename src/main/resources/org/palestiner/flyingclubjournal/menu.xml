@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://jmix.io/schema/ui/menu">
-
-    <menu id="application" caption="msg://org.palestiner.flyingclubjournal/menu.application" insertBefore="administration">
-        <item screen="User.browse" caption="msg://org.palestiner.flyingclubjournal.screen.user/UserBrowse.caption"/>
-        <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
+    <menu id="application" caption="msg://org.palestiner.flyingclubjournal/menu.application"
+          insertBefore="administration" icon="BOLT">
+        <item screen="Cadet.browse"
+              caption="msg://org.palestiner.flyingclubjournal.screen.cadet/cadetBrowse.menu"
+              icon="ADDRESS_CARD_O"/>
+        <item screen="Rate.browse"
+              caption="msg://org.palestiner.flyingclubjournal.screen.rate/rateBrowse.menu"
+              icon="DOLLAR"/>
+        <item screen="Airplane.browse"
+              caption="msg://org.palestiner.flyingclubjournal.screen.airplane/airplaneBrowse.menu"
+              icon="PLANE"/>
     </menu>
-
+    <menu id="administration" caption="msg://org.palestiner.flyingclubjournal/menu_config.admin">
+        <item screen="User.browse" caption="msg://org.palestiner.flyingclubjournal/menu_config.User.browse"
+              openMode="NEW_TAB"/>
+        <item screen="themeSettingsScreen" id="themeSettingsScreen"
+              caption="msg://org.palestiner.flyingclubjournal/menu_config.themeSettingsScreen"/>
+    </menu>
 </menu-config>
