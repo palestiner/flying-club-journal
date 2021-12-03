@@ -1,12 +1,14 @@
 package org.palestiner.flyingclubjournal.screen.cadet;
 
+import io.jmix.core.DataManager;
+import io.jmix.ui.ScreenBuilders;
+import io.jmix.ui.component.Button;
 import io.jmix.ui.component.ComboBox;
 import io.jmix.ui.model.CollectionContainer;
 import io.jmix.ui.model.CollectionLoader;
 import io.jmix.ui.screen.*;
 import org.palestiner.flyingclubjournal.entity.Cadet;
 import org.palestiner.flyingclubjournal.entity.Rate;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -15,13 +17,16 @@ import java.util.List;
 @UiDescriptor("cadet-edit.xml")
 @EditedEntityContainer("cadetDc")
 public class CadetEdit extends StandardEditor<Cadet> {
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(CadetEdit.class);
+    @Autowired
+    protected DataManager dataManager;
     @Autowired
     private ComboBox<Rate> rateField;
     @Autowired
     private CollectionContainer<Rate> ratesDc;
     @Autowired
     private CollectionLoader<Rate> ratesDl;
+    @Autowired
+    private ScreenBuilders screenBuilders;
 
     @Subscribe
     public void onInit(InitEvent event) {
@@ -30,5 +35,17 @@ public class CadetEdit extends StandardEditor<Cadet> {
         rateField.setOptionsList(items);
     }
 
-
+    @Subscribe("createRate")
+    public void onCreateRateClick(Button.ClickEvent event) {
+        Screen rateEdit = screenBuilders
+                .editor(Rate.class, this)
+                .editEntity(dataManager.create(Rate.class))
+                .withContainer(ratesDc)
+                .build();
+        rateEdit.addAfterCloseListener(afterCloseEvent -> {
+            ratesDl.load();
+            rateField.setOptionsList(ratesDc.getItems());
+        });
+        rateEdit.show();
+    }
 }

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://jmix.io/schema/ui/menu">
-    <menu id="application" caption="msg://org.palestiner.flyingclubjournal/menu.application"
-          insertBefore="administration" icon="BOLT">
+    <menu id="application"
+          expanded="true"
+          caption="msg://org.palestiner.flyingclubjournal/menu.application"
+          insertBefore="administration"
+          icon="BOLT">
         <item screen="Cadet.browse"
               caption="msg://org.palestiner.flyingclubjournal.screen.cadet/cadetBrowse.menu"
               icon="ADDRESS_CARD_O"/>
@@ -11,6 +14,9 @@
         <item screen="Airplane.browse"
               caption="msg://org.palestiner.flyingclubjournal.screen.airplane/airplaneBrowse.menu"
               icon="PLANE"/>
+        <item screen="MoneyAccounting.browse"
+              caption="msg://org.palestiner.flyingclubjournal.screen.moneyaccounting/moneyAccountingBrowse.menu"
+              icon="BANK"/>
     </menu>
     <menu id="administration" caption="msg://org.palestiner.flyingclubjournal/menu_config.admin">
         <item screen="User.browse" caption="msg://org.palestiner.flyingclubjournal/menu_config.User.browse"

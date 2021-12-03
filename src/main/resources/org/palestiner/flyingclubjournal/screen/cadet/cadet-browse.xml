@@ -41,9 +41,15 @@
                     editable="true"
                     dataContainer="cadetsDc">
             <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="create"
+                        type="create"
+                        caption="msg://org.palestiner.flyingclubjournal.screen/actions.Create"/>
+                <action id="edit"
+                        type="edit"
+                        caption="msg://org.palestiner.flyingclubjournal.screen/actions.Edit"/>
+                <action id="remove"
+                        type="remove"
+                        caption="msg://org.palestiner.flyingclubjournal.screen/actions.Remove"/>
             </actions>
             <columns>
                 <column id="name"/>

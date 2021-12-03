@@ -44,8 +44,12 @@
                 <comboBox id="rateField"
                           property="rate"
                           nullOptionVisible="false"
-
                           dataContainer="cadetDc"/>
+                <button id="createRate"
+                        align="BOTTOM_RIGHT"
+                        width="AUTO"
+                        caption="msg://org.palestiner.flyingclubjournal.screen.rate/actions.CreateRate"
+                        icon="CREATE_ACTION"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">
