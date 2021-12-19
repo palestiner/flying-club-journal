@@ -41,9 +41,9 @@ public class CadetEdit extends StandardEditor<Cadet> {
                 .editor(Rate.class, this)
                 .editEntity(dataManager.create(Rate.class))
                 .withContainer(ratesDc)
+                .withParentDataContext(ratesDl.getDataContext())
                 .build();
         rateEdit.addAfterCloseListener(afterCloseEvent -> {
-            ratesDl.load();
             rateField.setOptionsList(ratesDc.getItems());
         });
         rateEdit.show();

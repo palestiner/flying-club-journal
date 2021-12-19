@@ -1,0 +1,5 @@
+@import "../helium/helium";
+
+@mixin helium2 {
+  @include helium;
+}

@@ -39,6 +39,60 @@
         </createTable>
     </changeSet>
     <changeSet id="3" author="flying-club-journal">
+        <createTable tableName="FIGHT_ACCOUNTING">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_FIGHT_ACCOUNTING"/>
+            </column>
+            <column name="CADET_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INSTRUCTOR_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FLIGHT_DATE" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FLIGHT_TIME" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FLIGHT_TYPE_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="flying-club-journal">
+        <createTable tableName="FLIGHT_TYPE">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_FLIGHT_TYPE"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VALUE_" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="flying-club-journal">
+        <createTable tableName="INSTRUCTOR">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_INSTRUCTOR"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SURNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="6" author="flying-club-journal">
         <createTable tableName="MONEY_ACCOUNTING">
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_MONEY_ACCOUNTING"/>
@@ -57,7 +111,7 @@
             <column name="DELETED_DATE" type="DATETIME"/>
         </createTable>
     </changeSet>
-    <changeSet id="4" author="flying-club-journal">
+    <changeSet id="7" author="flying-club-journal">
         <createTable tableName="RATE">
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_RATE"/>
@@ -72,7 +126,7 @@
             <column name="DELETED_DATE" type="DATETIME"/>
         </createTable>
     </changeSet>
-    <changeSet id="5" author="flying-club-journal">
+    <changeSet id="8" author="flying-club-journal">
         <addForeignKeyConstraint baseColumnNames="RATE_ID" baseTableName="CADET" constraintName="FK_CADET_ON_RATE"
                                  referencedColumnNames="ID" referencedTableName="RATE"/>
 
@@ -80,7 +134,30 @@
             <column name="RATE_ID"/>
         </createIndex>
     </changeSet>
-    <changeSet id="6" author="flying-club-journal">
+    <changeSet id="9" author="flying-club-journal">
+        <addForeignKeyConstraint baseColumnNames="FLIGHT_TYPE_ID" baseTableName="FIGHT_ACCOUNTING"
+                                 constraintName="FK_FIGHTACCOUNTI_ON_FLIGHTTYPE" referencedColumnNames="ID"
+                                 referencedTableName="FLIGHT_TYPE"/>
+
+        <createIndex indexName="IDX_FIGHTACCOUNTING" tableName="FIGHT_ACCOUNTING">
+            <column name="FLIGHT_TYPE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="10" author="flying-club-journal">
+        <addForeignKeyConstraint baseColumnNames="INSTRUCTOR_ID" baseTableName="FIGHT_ACCOUNTING"
+                                 constraintName="FK_FIGHTACCOUNTI_ON_INSTRUCTOR" referencedColumnNames="ID"
+                                 referencedTableName="INSTRUCTOR"/>
+    </changeSet>
+    <changeSet id="11" author="flying-club-journal">
+        <addForeignKeyConstraint baseColumnNames="CADET_ID" baseTableName="FIGHT_ACCOUNTING"
+                                 constraintName="FK_FIGHT_ACCOUNTING_ON_CADET" referencedColumnNames="ID"
+                                 referencedTableName="CADET"/>
+
+        <createIndex indexName="IDX_FIGHTACCOUNTING_CADET_ID" tableName="FIGHT_ACCOUNTING">
+            <column name="CADET_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="12" author="flying-club-journal">
         <addForeignKeyConstraint baseColumnNames="CADET_ID" baseTableName="MONEY_ACCOUNTING"
                                  constraintName="FK_MONEY_ACCOUNTING_ON_CADET" referencedColumnNames="ID"
                                  referencedTableName="CADET"/>

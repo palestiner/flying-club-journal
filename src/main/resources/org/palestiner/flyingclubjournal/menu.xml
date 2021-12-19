@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://jmix.io/schema/ui/menu">
-    <menu id="application"
+    <menu id="main"
           expanded="true"
-          caption="msg://org.palestiner.flyingclubjournal/menu.application"
+          caption="msg://org.palestiner.flyingclubjournal/menu.main"
           insertBefore="administration"
           icon="BOLT">
+        <item screen="MoneyAccounting.browse"
+              caption="msg://org.palestiner.flyingclubjournal.screen.moneyaccounting/moneyAccountingBrowse.menu"
+              icon="BANK"/>
+        <item screen="FightAccounting.browse"
+              icon="CALENDAR"
+              caption="msg://org.palestiner.flyingclubjournal.screen.fightaccounting/fightAccountingBrowse.menu"/>
+    </menu>
+    <menu id="second"
+          expanded="false"
+          insertAfter="main"
+          icon="GEAR"
+          caption="msg://org.palestiner.flyingclubjournal/menu.second"
+    >
         <item screen="Cadet.browse"
               caption="msg://org.palestiner.flyingclubjournal.screen.cadet/cadetBrowse.menu"
               icon="ADDRESS_CARD_O"/>
@@ -14,9 +27,11 @@
         <item screen="Airplane.browse"
               caption="msg://org.palestiner.flyingclubjournal.screen.airplane/airplaneBrowse.menu"
               icon="PLANE"/>
-        <item screen="MoneyAccounting.browse"
-              caption="msg://org.palestiner.flyingclubjournal.screen.moneyaccounting/moneyAccountingBrowse.menu"
-              icon="BANK"/>
+        <item screen="Instructor.browse"
+              icon="USER"
+              caption="msg://org.palestiner.flyingclubjournal.screen.instructor/instructorBrowse.menu"/>
+        <item screen="FlightType.browse"
+              caption="msg://org.palestiner.flyingclubjournal.screen.flighttype/flightTypeBrowse.menu"/>
     </menu>
     <menu id="administration" caption="msg://org.palestiner.flyingclubjournal/menu_config.admin">
         <item screen="User.browse" caption="msg://org.palestiner.flyingclubjournal/menu_config.User.browse"

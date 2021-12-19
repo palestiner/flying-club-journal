@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://fightAccountingEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="fightAccountingDc"
+                  class="org.palestiner.flyingclubjournal.entity.FightAccounting">
+            <fetchPlan extends="_base">
+                <property name="cadet" fetchPlan="_base">
+                    <property name="rate" fetchPlan="_base"/>
+                </property>
+                <property name="instructor" fetchPlan="_base"/>
+                <property name="flightType" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+        <collection id="flightTypesDc"
+                    class="org.palestiner.flyingclubjournal.entity.FlightType"
+                    fetchPlan="_base">
+            <loader id="flightTypesDl">
+                <query>
+                    select e from FlightType e
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode modal="true"
+                forceDialog="true"
+                height="AUTO"
+                width="AUTO"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="fightAccountingDc">
+            <column width="350px">
+                <entityPicker id="cadetField" property="cadet">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <entityPicker id="instructorField" property="instructor">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <dateField id="flightDateField" property="flightDate"/>
+                <textField id="flightTimeField" property="flightTime"/>
+                <comboBox id="flightTypeField"
+                          nullOptionVisible="false"
+                          property="flightType"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

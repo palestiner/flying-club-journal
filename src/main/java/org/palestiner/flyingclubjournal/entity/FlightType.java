@@ -1,10 +1,8 @@
 package org.palestiner.flyingclubjournal.entity;
 
-import io.jmix.core.DeletePolicy;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
-import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
@@ -14,30 +12,22 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.UUID;
 
-@JmixEntity
-@Table(name = "CADET", indexes = {
-        @Index(name = "IDX_CADET_RATE_ID", columnList = "RATE_ID")
-})
 @Entity
-public class Cadet {
+@JmixEntity
+@Table(name = "FLIGHT_TYPE")
+public class FlightType {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
 
-    @NotNull(message = "{msg://org.palestiner.flyingclubjournal.entity/Cadet.name.validation.NotNull}")
+    @NotNull(message = "{msg://org.palestiner.flyingclubjournal.entity/FlightType.name.validation.NotNull}")
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @NotNull(message = "{msg://org.palestiner.flyingclubjournal.entity/Cadet.surname.validation.NotNull}")
-    @Column(name = "SURNAME", nullable = false)
-    private String surname;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @NotNull(message = "{msg://org.palestiner.flyingclubjournal.entity/Cadet.rate.validation.NotNull}")
-    @OnDeleteInverse(DeletePolicy.DENY)
-    @JoinColumn(name = "RATE_ID", nullable = false)
-    private Rate rate;
+    @NotNull(message = "{msg://org.palestiner.flyingclubjournal.entity/FlightType.value.validation.NotNull}")
+    @Column(name = "VALUE_", nullable = false)
+    private String value;
 
     @DeletedBy
     @Column(name = "DELETED_BY")
@@ -64,20 +54,12 @@ public class Cadet {
         this.deletedBy = deletedBy;
     }
 
-    public Rate getRate() {
-        return rate;
+    public String getValue() {
+        return value;
     }
 
-    public void setRate(Rate rate) {
-        this.rate = rate;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getName() {
@@ -97,8 +79,8 @@ public class Cadet {
     }
 
     @InstanceName
-    @DependsOnProperties({"name", "surname"})
+    @DependsOnProperties({"name", "value"})
     public String getInstanceName() {
-        return String.format("%s %s", name, surname);
+        return String.format("%s [%s]", name, value);
     }
 }
