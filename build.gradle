@@ -1,6 +1,6 @@
 plugins {
     id 'io.jmix' version '1.1.0'
-    id 'java'
+    id 'war'
 }
 
 apply plugin: 'org.springframework.boot'
@@ -32,15 +32,19 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    runtimeOnly 'org.hsqldb:hsqldb'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     themes("io.jmix.ui:jmix-ui-themes")
     implementation("io.jmix.ui:jmix-ui-themes")
+    implementation("org.postgresql:postgresql")
+    implementation("org.hsqldb:hsqldb")
 }
 
 test {
     useJUnitPlatform()
 }
+
+task stage(dependsOn: ['clean', 'bootWar'])
+bootWar.mustRunAfter clean

@@ -23,8 +23,10 @@
                 <value>
                   <DataStoreSettings>
                     <option name="generateDdlType" value="CREATE_AND_UPDATE" />
+                    <option name="nameLengthMode" value="POSTGRES" />
                     <option name="supportedTypes">
                       <option value="hsql" />
+                      <option value="postgres" />
                     </option>
                   </DataStoreSettings>
                 </value>
