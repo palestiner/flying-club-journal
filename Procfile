@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar webapp-runner.jar ${WEBAPP_RUNNER_OPTS} --port $PORT ./build/libs/flying-club-journal-1.0.0.war
+web: java -jar build/server/webapp-runner-*.jar build/libs/*.war

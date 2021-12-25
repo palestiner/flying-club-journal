@@ -1,6 +1,7 @@
 plugins {
     id 'io.jmix' version '1.1.0'
     id 'war'
+    id 'java'
 }
 
 apply plugin: 'org.springframework.boot'
@@ -20,6 +21,7 @@ repositories {
 }
 
 dependencies {
+    compileOnly 'com.github.jsimone:webapp-runner:9.0.27.1'
     implementation 'io.jmix.core:jmix-core-starter'
     implementation 'io.jmix.data:jmix-eclipselink-starter'
     implementation 'io.jmix.ui:jmix-ui-starter'
@@ -46,5 +48,14 @@ test {
     useJUnitPlatform()
 }
 
-task stage(dependsOn: ['clean', 'bootWar'])
-bootWar.mustRunAfter clean
+task stage(dependsOn: ['clean', 'war'])
+war.mustRunAfter clean
+
+task copyToLib(type: Copy) {
+    into "$buildDir/server"
+    from(configurations.compileOnly) {
+        include "webapp-runner*"
+    }
+}
+
+stage.dependsOn(copyToLib)
