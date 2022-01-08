@@ -31,6 +31,15 @@
                   </DataStoreSettings>
                 </value>
               </entry>
+              <entry key="postgres">
+                <value>
+                  <DataStoreSettings>
+                    <option name="supportedTypes">
+                      <option value="postgres" />
+                    </option>
+                  </DataStoreSettings>
+                </value>
+              </entry>
             </map>
           </option>
         </ModuleSettings>

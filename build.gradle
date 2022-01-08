@@ -1,6 +1,5 @@
 plugins {
     id 'io.jmix' version '1.1.0'
-    id 'war'
     id 'java'
 }
 
@@ -48,14 +47,5 @@ test {
     useJUnitPlatform()
 }
 
-task stage(dependsOn: ['clean', 'bootWar'])
-bootWar.mustRunAfter clean
-
-task copyToLib(type: Copy) {
-    into "$buildDir/server"
-    from(configurations.runtimeClasspath) {
-        include "webapp-runner*"
-    }
-}
-
-stage.dependsOn(copyToLib)
+task stage(dependsOn: ['clean', 'bootJar'])
+bootJar.mustRunAfter clean
