@@ -1,1 +1,1 @@
-web: java -jar build/libs/*.jar
+web: cd build ; ls -la ; java -jar build/libs/*.jar
