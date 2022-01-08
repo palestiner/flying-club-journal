@@ -1,6 +1,14 @@
 .jmix
 
 .gradle
+build/tmp
+build/themes
+build/classes
+build/reports
+build/generated
+build/resources
+build/test-results
+build/bootJarMainClassName
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
