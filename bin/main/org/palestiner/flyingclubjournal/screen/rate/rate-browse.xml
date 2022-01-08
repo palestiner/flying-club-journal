@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://rateBrowse.caption"
+        focusComponent="ratesTable">
+    <data readOnly="true">
+        <collection id="ratesDc"
+                    class="org.palestiner.flyingclubjournal.entity.Rate">
+            <fetchPlan extends="_base"/>
+            <loader id="ratesDl">
+                <query>
+                    <![CDATA[select e from Rate e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="ratesTable" spacing="true">
+<!--        <filter id="filter"-->
+<!--                dataLoader="ratesDl">-->
+<!--            <properties include=".*"/>-->
+<!--        </filter>-->
+        <groupTable id="ratesTable"
+                    width="100%"
+                    dataContainer="ratesDc">
+            <actions>
+                <action id="create" type="create"
+                        caption="msg://org.palestiner.flyingclubjournal.screen/actions.Create"/>
+                <action id="edit" type="edit"
+                        caption="msg://org.palestiner.flyingclubjournal.screen/actions.Edit"/>
+                <action id="remove" type="remove"
+                        caption="msg://org.palestiner.flyingclubjournal.screen/actions.Remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="price"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="ratesTable.create"/>
+                <button id="editBtn" action="ratesTable.edit"/>
+                <button id="removeBtn" action="ratesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

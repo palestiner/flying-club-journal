@@ -1,1 +1,1 @@
-web: cd build ; ls -la ; java -jar build/libs/*.jar
+web: ./gradlew stage ; java -jar build/libs/*.jar
