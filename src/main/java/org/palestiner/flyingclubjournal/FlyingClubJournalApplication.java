@@ -42,9 +42,8 @@ public class FlyingClubJournalApplication extends SpringBootServletInitializer {
 
     @EventListener
     public void printApplicationUrl(ApplicationStartedEvent event) {
-        LoggerFactory.getLogger(FlyingClubJournalApplication.class).info("Application started at "
-                + "http://localhost:"
-                + environment.getProperty("local.server.port")
-                + Strings.nullToEmpty(environment.getProperty("server.servlet.context-path")));
+        LoggerFactory.getLogger(FlyingClubJournalApplication.class).info(String.format("Application started at http://localhost:%s%s",
+                environment.getProperty("local.server.port"),
+                Strings.nullToEmpty(environment.getProperty("server.servlet.context-path"))));
     }
 }
