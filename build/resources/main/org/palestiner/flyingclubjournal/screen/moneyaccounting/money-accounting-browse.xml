@@ -37,26 +37,33 @@
     <layout expand="moneyAccountingsTable" spacing="true">
         <groupTable id="moneyAccountingsTable"
                     width="100%"
+                    aggregatable="true"
+                    fixedGrouping="true"
+                    editable="true"
                     dataContainer="moneyAccountingsDc">
             <actions>
-<!--                <action id="create" type="create"/>-->
-<!--                <action id="edit" type="edit"/>-->
                 <action id="refresh" type="refresh"/>
-<!--                <action id="remove" type="remove"/>-->
             </actions>
             <columns>
+                <group>
+                    <column id="cadet"/>
+                </group>
                 <column id="flightDate"/>
                 <column id="accrued"/>
-                <column id="paid"/>
-                <column id="cadet"/>
+                <column id="paid" editable="true"/>
+                <column id="total"
+                        editable="false">
+                    <aggregation type="SUM"
+                                 editable="false"/>
+                </column>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-<!--                <button id="createBtn" action="moneyAccountingsTable.create"/>-->
-<!--                <button id="editBtn" action="moneyAccountingsTable.edit"/>-->
+                <!--                <button id="createBtn" action="moneyAccountingsTable.create"/>-->
+                <!--                <button id="editBtn" action="moneyAccountingsTable.edit"/>-->
                 <button id="refreshBtn" action="moneyAccountingsTable.refresh"/>
-<!--                <button id="removeBtn" action="moneyAccountingsTable.remove"/>-->
+                <!--                <button id="removeBtn" action="moneyAccountingsTable.remove"/>-->
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

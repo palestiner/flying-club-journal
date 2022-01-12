@@ -2,4 +2,10 @@
 
 @mixin helium2 {
   @include helium;
+  .green {
+    color: #35d035 !important;
+  }
+  .red {
+    color: red !important;
+  }
 }
