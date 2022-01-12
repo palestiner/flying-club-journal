@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="flying-club-journal">
+        <addColumn tableName="FIGHT_ACCOUNTING">
+            <column name="MONEY_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2" author="flying-club-journal">
+        <addForeignKeyConstraint baseColumnNames="MONEY_ID" baseTableName="FIGHT_ACCOUNTING"
+                                 constraintName="FK_FIGHT_ACCOUNTING_ON_MONEY" referencedColumnNames="ID"
+                                 referencedTableName="MONEY_ACCOUNTING"/>
+    </changeSet>
+    <changeSet id="3" author="flying-club-journal">
+        <dropIndex indexName="IDX_FIGHTACCOUNTING" tableName="FIGHT_ACCOUNTING"/>
+    </changeSet>
+    <changeSet id="4" author="flying-club-journal">
+        <createIndex indexName="IDX_FIGHTACCOUNTING" tableName="FIGHT_ACCOUNTING" unique="false">
+            <column name="MONEY_ID"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

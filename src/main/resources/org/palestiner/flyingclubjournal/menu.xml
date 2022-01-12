@@ -5,12 +5,12 @@
           caption="msg://org.palestiner.flyingclubjournal/menu.main"
           insertBefore="administration"
           icon="BOLT">
-        <item screen="MoneyAccounting.browse"
-              caption="msg://org.palestiner.flyingclubjournal.screen.moneyaccounting/moneyAccountingBrowse.menu"
-              icon="BANK"/>
         <item screen="FightAccounting.browse"
               icon="CALENDAR"
               caption="msg://org.palestiner.flyingclubjournal.screen.fightaccounting/fightAccountingBrowse.menu"/>
+        <item screen="MoneyAccounting.browse"
+              caption="msg://org.palestiner.flyingclubjournal.screen.moneyaccounting/moneyAccountingBrowse.menu"
+              icon="BANK"/>
     </menu>
     <menu id="second"
           expanded="false"
@@ -31,6 +31,7 @@
               icon="USER"
               caption="msg://org.palestiner.flyingclubjournal.screen.instructor/instructorBrowse.menu"/>
         <item screen="FlightType.browse"
+              icon="RANDOM"
               caption="msg://org.palestiner.flyingclubjournal.screen.flighttype/flightTypeBrowse.menu"/>
     </menu>
     <menu id="administration" caption="msg://org.palestiner.flyingclubjournal/menu_config.admin">

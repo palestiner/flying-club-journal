@@ -1,0 +1,10 @@
+<fetchPlans xmlns="http://jmix.io/schema/core/fetch-plans">
+    <fetchPlan class="org.palestiner.flyingclubjournal.entity.FightAccounting"
+               name="FA_for_FM"
+               extends="_base">
+        <property name="flightType" fetchPlan="_base"/>
+        <property name="cadet" fetchPlan="_base">
+            <property name="rate" fetchPlan="_base"/>
+        </property>
+    </fetchPlan>
+</fetchPlans>

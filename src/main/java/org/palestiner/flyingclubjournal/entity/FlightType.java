@@ -27,7 +27,7 @@ public class FlightType {
 
     @NotNull(message = "{msg://org.palestiner.flyingclubjournal.entity/FlightType.value.validation.NotNull}")
     @Column(name = "VALUE_", nullable = false)
-    private String value;
+    private Double value;
 
     @DeletedBy
     @Column(name = "DELETED_BY")
@@ -54,11 +54,11 @@ public class FlightType {
         this.deletedBy = deletedBy;
     }
 
-    public String getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

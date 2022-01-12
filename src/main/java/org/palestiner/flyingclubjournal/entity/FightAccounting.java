@@ -4,7 +4,6 @@ import io.jmix.core.DeletePolicy;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
-import io.jmix.core.entity.annotation.OnDelete;
 import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
@@ -19,7 +18,8 @@ import java.util.UUID;
 @Table(name = "FIGHT_ACCOUNTING", indexes = {
         @Index(name = "IDX_FIGHTACCOUNTING_CADET_ID", columnList = "CADET_ID"),
         @Index(name = "IDX_FIGHTACCOUNTING", columnList = "INSTRUCTOR_ID"),
-        @Index(name = "IDX_FIGHTACCOUNTING", columnList = "FLIGHT_TYPE_ID")
+        @Index(name = "IDX_FIGHTACCOUNTING", columnList = "FLIGHT_TYPE_ID"),
+        @Index(name = "IDX_FIGHTACCOUNTING", columnList = "MONEY_ID")
 })
 @Entity
 public class FightAccounting {
@@ -30,14 +30,17 @@ public class FightAccounting {
 
     @NotNull(message = "{msg://org.palestiner.flyingclubjournal.entity/FightAccounting.cadet.validation.NotNull}")
     @OnDeleteInverse(DeletePolicy.DENY)
-    @OnDelete(DeletePolicy.UNLINK)
     @JoinColumn(name = "CADET_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Cadet cadet;
 
+    @OnDeleteInverse(DeletePolicy.DENY)
+    @JoinColumn(name = "MONEY_ID", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    private MoneyAccounting moneyAccounting;
+
     @NotNull(message = "{msg://org.palestiner.flyingclubjournal.entity/FightAccounting.instructor.validation.NotNull}")
     @OnDeleteInverse(DeletePolicy.DENY)
-    @OnDelete(DeletePolicy.UNLINK)
     @JoinColumn(name = "INSTRUCTOR_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Instructor instructor;
@@ -52,7 +55,6 @@ public class FightAccounting {
     private Double flightTime;
 
     @OnDeleteInverse(DeletePolicy.DENY)
-    @OnDelete(DeletePolicy.UNLINK)
     @JoinColumn(name = "FLIGHT_TYPE_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private FlightType flightType;
@@ -134,5 +136,13 @@ public class FightAccounting {
     @DependsOnProperties({"flightDate", "flightTime", "cadet"})
     public String getInstanceName() {
         return String.format("%s %f min [%s]", flightDate, flightTime, cadet);
+    }
+
+    public MoneyAccounting getMoneyAccounting() {
+        return moneyAccounting;
+    }
+
+    public void setMoneyAccounting(MoneyAccounting moneyAccounting) {
+        this.moneyAccounting = moneyAccounting;
     }
 }
