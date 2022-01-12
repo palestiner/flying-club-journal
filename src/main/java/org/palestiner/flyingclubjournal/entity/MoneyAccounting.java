@@ -53,6 +53,9 @@ public class MoneyAccounting {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
+    @Column(name = "TOTAL")
+    private Double total;
+
     public Cadet getCadet() {
         return cadet;
     }
@@ -113,5 +116,13 @@ public class MoneyAccounting {
     @DependsOnProperties({"cadet", "flightDate"})
     public String getInstanceName() {
         return String.format("%s [%s]", cadet, flightDate);
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 }
