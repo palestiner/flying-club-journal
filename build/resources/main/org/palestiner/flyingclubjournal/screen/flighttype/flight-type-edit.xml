@@ -22,8 +22,10 @@
                 caption="msg:///actions.Close"
                 icon="EDITOR_CANCEL"/>
     </actions>
-    <dialogMode height="600"
-                width="800"/>
+    <dialogMode forceDialog="true"
+                modal="true"
+                height="AUTO"
+                width="AUTO"/>
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="flightTypeDc">
             <column width="350px">
