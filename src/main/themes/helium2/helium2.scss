@@ -4,8 +4,27 @@
   @include helium;
   .green {
     color: #35d035 !important;
+    font-size: 1rem;
   }
   .red {
-    color: red !important;
+    color: #ffb100 !important;
+    font-size: 1rem;
+  }
+  .v-button {
+    height: 34px;
+    border-radius: 6px;
+    padding: 0 16px;
+    border-color: var(--button-default-color);
+    background: var(--button-default-color);
+    color: var(--button-default-text-color);
+    border-width: var(--button-border-width);
+    border-style: solid;
+  }
+  .v-button-link {
+    padding: 0 var(--button-border-width);
+    height: auto;
+    border: 1px dashed transparent;
+    background: transparent;
+    color: var(--primary-color);
   }
 }

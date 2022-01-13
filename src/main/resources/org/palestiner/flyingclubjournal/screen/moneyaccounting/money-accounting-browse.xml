@@ -40,9 +40,11 @@
                     aggregatable="true"
                     fixedGrouping="true"
                     editable="true"
+                    multiselect="true"
                     dataContainer="moneyAccountingsDc">
             <actions>
                 <action id="refresh" type="refresh"/>
+                <action id="report" icon="EXCEL_ACTION" caption="msg://report"/>
             </actions>
             <columns>
                 <group>
@@ -60,10 +62,8 @@
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <!--                <button id="createBtn" action="moneyAccountingsTable.create"/>-->
-                <!--                <button id="editBtn" action="moneyAccountingsTable.edit"/>-->
                 <button id="refreshBtn" action="moneyAccountingsTable.refresh"/>
-                <!--                <button id="removeBtn" action="moneyAccountingsTable.remove"/>-->
+                <button id="reportBtn" action="moneyAccountingsTable.report"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
