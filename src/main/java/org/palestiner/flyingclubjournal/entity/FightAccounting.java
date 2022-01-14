@@ -45,6 +45,12 @@ public class FightAccounting {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Instructor instructor;
 
+    @NotNull(message = "{msg://org.palestiner.flyingclubjournal.entity/FightAccounting.airplain.validation.NotNull}")
+    @OnDeleteInverse(DeletePolicy.DENY)
+    @JoinColumn(name = "AIRPLANE_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Airplane airplain;
+
     @NotNull(message = "{msg://org.palestiner.flyingclubjournal.entity/FightAccounting.flightDate.validation.NotNull}")
     @Column(name = "FLIGHT_DATE", nullable = false)
     @Temporal(TemporalType.DATE)
@@ -144,5 +150,13 @@ public class FightAccounting {
 
     public void setMoneyAccounting(MoneyAccounting moneyAccounting) {
         this.moneyAccounting = moneyAccounting;
+    }
+
+    public Airplane getAirplain() {
+        return airplain;
+    }
+
+    public void setAirplain(Airplane airplain) {
+        this.airplain = airplain;
     }
 }

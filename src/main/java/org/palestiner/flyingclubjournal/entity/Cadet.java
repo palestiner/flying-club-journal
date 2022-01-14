@@ -10,7 +10,9 @@ import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.UUID;
 
@@ -38,6 +40,14 @@ public class Cadet {
     @OnDeleteInverse(DeletePolicy.DENY)
     @JoinColumn(name = "RATE_ID", nullable = false)
     private Rate rate;
+
+    @Column(name = "DISCOUNT")
+    private Double discount;
+
+    @Email(message = "{msg://org.palestiner.flyingclubjournal.entity/Cadet.email.validation.Email}")
+    @Pattern(regexp=".+@.+\\..+")
+    @Column(name = "EMAIL")
+    private String email;
 
     @DeletedBy
     @Column(name = "DELETED_BY")
@@ -100,5 +110,21 @@ public class Cadet {
     @DependsOnProperties({"name", "surname"})
     public String getInstanceName() {
         return String.format("%s %s", name, surname);
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
