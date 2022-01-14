@@ -40,6 +40,7 @@ dependencies {
     themes("io.jmix.ui:jmix-ui-themes")
     implementation("io.jmix.ui:jmix-ui-themes")
     implementation("io.jmix.ui:jmix-ui-export-starter")
+    implementation("org.postgresql:postgresql")
 }
 
 test {
