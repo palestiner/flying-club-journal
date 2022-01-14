@@ -39,7 +39,6 @@ public class MoneyAccounting {
 
     @NotNull(message = "{msg://org.palestiner.flyingclubjournal.entity/MoneyAccounting.cadet.validation.NotNull}")
     @OnDeleteInverse(DeletePolicy.DENY)
-    @OnDelete(DeletePolicy.UNLINK)
     @JoinColumn(name = "CADET_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Cadet cadet;
