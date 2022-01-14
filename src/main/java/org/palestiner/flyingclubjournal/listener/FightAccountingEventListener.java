@@ -1,6 +1,7 @@
 package org.palestiner.flyingclubjournal.listener;
 
 import io.jmix.core.DataManager;
+import io.jmix.core.Id;
 import io.jmix.core.SaveContext;
 import io.jmix.core.event.EntityChangedEvent;
 import io.jmix.core.event.EntitySavingEvent;
@@ -17,6 +18,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Objects;
 
 @Component
 public class FightAccountingEventListener {
@@ -31,7 +33,20 @@ public class FightAccountingEventListener {
             FightAccounting flight = getFightAccounting(event);
             if (event.getType() != EntityChangedEvent.Type.DELETED) handleFlightAcc(flight);
         } catch (Exception e) {
-            log.error("Error on fight accounting changed after commit", e);
+            log.error("Error on flight accounting changed after commit", e);
+        }
+    }
+
+    @EventListener
+    public void onFightAccountingChangedBeforeCommit(EntityChangedEvent<FightAccounting> event) {
+        try {
+            Object moneyAccounting = dataManager
+                    .load(Objects.requireNonNull(event.getChanges().getOldReferenceId("moneyAccounting")))
+                    .one();
+            if (event.getType() == EntityChangedEvent.Type.DELETED)
+                dataManager.remove(moneyAccounting);
+        } catch (Exception e) {
+            log.error("Error on flight accounting changed before commit", e);
         }
     }
 
@@ -42,8 +57,7 @@ public class FightAccountingEventListener {
             MoneyAccounting moneyAccounting = dataManager.create(MoneyAccounting.class);
             copyOption(flightAcc, moneyAccounting);
             saveMoneyAcc(moneyAccounting);
-            flightAcc
-                    .setMoneyAccounting(moneyAccounting);
+            flightAcc.setMoneyAccounting(moneyAccounting);
         }
     }
 
@@ -59,6 +73,7 @@ public class FightAccountingEventListener {
         MoneyAccounting money = dataManager
                 .load(MoneyAccounting.class)
                 .id(flight.getMoneyAccounting().getId())
+                .joinTransaction(false)
                 .one();
         handleAndSaveMoney(flight, money);
     }
@@ -74,11 +89,11 @@ public class FightAccountingEventListener {
                 .setJoinTransaction(false));
     }
 
-    private void copyOption(FightAccounting flight, MoneyAccounting money) {
-        money.setCadet(flight.getCadet());
-        money.setFlightDate(fromDateToLocalDate(flight));
-        money.setAccrued(calculateAccrued(flight));
-        money.setPaid(0d);
+    private void copyOption(FightAccounting from, MoneyAccounting to) {
+        to.setCadet(from.getCadet());
+        to.setFlightDate(fromDateToLocalDate(from));
+        to.setAccrued(calculateAccrued(from));
+        to.setPaid(to.getPaid() != null ? to.getPaid() : 0d);
     }
 
     private LocalDate fromDateToLocalDate(FightAccounting flight) {

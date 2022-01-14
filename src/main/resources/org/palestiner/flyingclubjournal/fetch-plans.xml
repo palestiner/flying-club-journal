@@ -6,5 +6,6 @@
         <property name="cadet" fetchPlan="_base">
             <property name="rate" fetchPlan="_base"/>
         </property>
+        <property name="moneyAccounting" fetchPlan="_base"/>
     </fetchPlan>
 </fetchPlans>
