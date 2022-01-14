@@ -58,6 +58,12 @@
                 </entityPicker>
                 <dateField id="flightDateField" property="flightDate"/>
                 <textField id="flightTimeField" property="flightTime"/>
+                <entityPicker id="airplainField" property="airplain">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
                 <comboBox id="flightTypeField"
                           nullOptionVisible="false"
                           property="flightType"/>

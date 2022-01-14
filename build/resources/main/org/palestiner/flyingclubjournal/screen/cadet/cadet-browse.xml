@@ -59,6 +59,8 @@
                 <column id="name"/>
                 <column id="surname"/>
                 <column id="rate" editable="true"/>
+                <column id="discount"/>
+                <column id="email"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

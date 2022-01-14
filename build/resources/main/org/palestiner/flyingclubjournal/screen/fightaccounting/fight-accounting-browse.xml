@@ -50,6 +50,7 @@
                 <column id="flightDate"/>
                 <column id="flightTime"/>
                 <column id="flightType"/>
+                <column id="airplain"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
