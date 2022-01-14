@@ -45,6 +45,8 @@
                           property="rate"
                           nullOptionVisible="false"
                           dataContainer="cadetDc"/>
+                <textField id="discountField" property="discount"/>
+                <textField id="emailField" property="email"/>
                 <button id="createRate"
                         align="BOTTOM_RIGHT"
                         width="AUTO"

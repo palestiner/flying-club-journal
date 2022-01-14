@@ -1,13 +1,12 @@
 package org.palestiner.flyingclubjournal.listener;
 
 import io.jmix.core.DataManager;
-import io.jmix.core.Id;
 import io.jmix.core.SaveContext;
 import io.jmix.core.event.EntityChangedEvent;
 import io.jmix.core.event.EntitySavingEvent;
 import org.palestiner.flyingclubjournal.entity.FightAccounting;
-import org.palestiner.flyingclubjournal.entity.FlightType;
 import org.palestiner.flyingclubjournal.entity.MoneyAccounting;
+import org.palestiner.flyingclubjournal.service.CalcMoneyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,8 @@ public class FightAccountingEventListener {
 
     @Autowired
     private DataManager dataManager;
+    @Autowired
+    private CalcMoneyService calcMoneyService;
 
     @TransactionalEventListener
     public void onChangedAfterCommit(EntityChangedEvent<FightAccounting> event) {
@@ -92,7 +93,7 @@ public class FightAccountingEventListener {
     private void copyOption(FightAccounting from, MoneyAccounting to) {
         to.setCadet(from.getCadet());
         to.setFlightDate(fromDateToLocalDate(from));
-        to.setAccrued(calculateAccrued(from));
+        to.setAccrued(calcMoneyService.calculateAccrued(from));
         to.setPaid(to.getPaid() != null ? to.getPaid() : 0d);
     }
 
@@ -102,12 +103,5 @@ public class FightAccountingEventListener {
                 .toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
-    }
-
-    private Double calculateAccrued(FightAccounting flight) {
-        Double flightTime = flight.getFlightTime();
-        FlightType flightType = flight.getFlightType();
-        Double price = flight.getCadet().getRate().getPrice();
-        return price * flightTime * flightType.getValue();
     }
 }
