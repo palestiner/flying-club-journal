@@ -4,6 +4,7 @@ import io.jmix.core.DataManager;
 import io.jmix.ui.UiComponents;
 import io.jmix.ui.component.ComboBox;
 import io.jmix.ui.component.Component;
+import io.jmix.ui.component.EntityComboBox;
 import io.jmix.ui.component.GroupTable;
 import io.jmix.ui.model.CollectionContainer;
 import io.jmix.ui.model.DataContext;
@@ -27,7 +28,7 @@ public class CadetBrowse extends StandardLookup<Cadet> {
 
     @Install(to = "cadetsTable.rate", subject = "columnGenerator")
     private Component cadetsTableRateColumnGenerator(Cadet cadet) {
-        ComboBox<Rate> rateComboBox = uiComponents.create(ComboBox.of(Rate.class));
+        EntityComboBox<Rate> rateComboBox = uiComponents.create(EntityComboBox.of(Rate.class));
         rateComboBox.setNullOptionVisible(false);
         rateComboBox.setValue(cadet.getRate());
         rateComboBox.setOptionsList(ratesDc.getItems());
