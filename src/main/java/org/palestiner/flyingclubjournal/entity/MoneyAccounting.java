@@ -4,7 +4,6 @@ import io.jmix.core.DeletePolicy;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
-import io.jmix.core.entity.annotation.OnDelete;
 import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
@@ -29,7 +28,8 @@ public class MoneyAccounting {
 
     @NotNull(message = "{msg://org.palestiner.flyingclubjournal.entity/MoneyAccounting.flightDate.validation.NotNull}")
     @Column(name = "FLIGHT_DATE", nullable = false)
-    private LocalDate flightDate;
+    @Temporal(TemporalType.DATE)
+    private Date flightDate;
 
     @Column(name = "ACCRUED", nullable = false)
     private Double accrued;
@@ -79,11 +79,11 @@ public class MoneyAccounting {
         this.accrued = accrued;
     }
 
-    public LocalDate getFlightDate() {
+    public Date getFlightDate() {
         return flightDate;
     }
 
-    public void setFlightDate(LocalDate flightDate) {
+    public void setFlightDate(Date flightDate) {
         this.flightDate = flightDate;
     }
 

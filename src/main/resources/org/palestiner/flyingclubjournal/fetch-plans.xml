@@ -8,4 +8,11 @@
         </property>
         <property name="moneyAccounting" fetchPlan="_base"/>
     </fetchPlan>
+    <fetchPlan class="org.palestiner.flyingclubjournal.entity.MoneyAccounting"
+               name="MA_for_Rate"
+               extends="_base">
+        <property name="cadet" fetchPlan="_base">
+            <property name="rate" fetchPlan="_base"/>
+        </property>
+    </fetchPlan>
 </fetchPlans>

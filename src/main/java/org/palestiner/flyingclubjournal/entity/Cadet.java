@@ -45,7 +45,7 @@ public class Cadet {
     private Double discount;
 
     @Email(message = "{msg://org.palestiner.flyingclubjournal.entity/Cadet.email.validation.Email}")
-    @Pattern(regexp=".+@.+\\..+")
+    @Pattern(regexp = ".+@.+\\\\..+")
     @Column(name = "EMAIL")
     private String email;
 

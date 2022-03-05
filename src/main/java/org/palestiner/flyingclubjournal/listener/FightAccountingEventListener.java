@@ -15,8 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionalEventListener;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Objects;
 
 @Component
@@ -41,11 +39,12 @@ public class FightAccountingEventListener {
     @EventListener
     public void onFightAccountingChangedBeforeCommit(EntityChangedEvent<FightAccounting> event) {
         try {
-            Object moneyAccounting = dataManager
-                    .load(Objects.requireNonNull(event.getChanges().getOldReferenceId("moneyAccounting")))
-                    .one();
-            if (event.getType() == EntityChangedEvent.Type.DELETED)
+            if (event.getType() == EntityChangedEvent.Type.DELETED) {
+                Object moneyAccounting = dataManager
+                        .load(Objects.requireNonNull(event.getChanges().getOldReferenceId("moneyAccounting")))
+                        .one();
                 dataManager.remove(moneyAccounting);
+            }
         } catch (Exception e) {
             log.error("Error on flight accounting changed before commit", e);
         }
@@ -92,16 +91,8 @@ public class FightAccountingEventListener {
 
     private void copyOption(FightAccounting from, MoneyAccounting to) {
         to.setCadet(from.getCadet());
-        to.setFlightDate(fromDateToLocalDate(from));
+        to.setFlightDate(from.getFlightDate());
         to.setAccrued(calcMoneyService.calculateAccrued(from));
         to.setPaid(to.getPaid() != null ? to.getPaid() : 0d);
-    }
-
-    private LocalDate fromDateToLocalDate(FightAccounting flight) {
-        return flight
-                .getFlightDate()
-                .toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
     }
 }
