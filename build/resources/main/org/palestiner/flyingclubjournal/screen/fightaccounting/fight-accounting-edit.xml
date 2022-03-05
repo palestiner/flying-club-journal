@@ -11,6 +11,7 @@
                 </property>
                 <property name="instructor" fetchPlan="_base"/>
                 <property name="flightType" fetchPlan="_base"/>
+                <property name="airplain" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
         </instance>
@@ -20,6 +21,35 @@
             <loader id="flightTypesDl">
                 <query>
                     select e from FlightType e
+                </query>
+            </loader>
+        </collection>
+        <collection id="planDC"
+                    class="org.palestiner.flyingclubjournal.entity.Airplane"
+                    fetchPlan="_base">
+            <loader id="planDl">
+                <query>
+                    select e from Airplane e
+                </query>
+            </loader>
+        </collection>
+        <collection id="instructorDc"
+                    class="org.palestiner.flyingclubjournal.entity.Instructor"
+                    fetchPlan="_base">
+            <loader id="instructorDl">
+                <query>
+                    select e from Instructor e
+                </query>
+            </loader>
+        </collection>
+        <collection id="cadetDc"
+                    class="org.palestiner.flyingclubjournal.entity.Cadet">
+            <fetchPlan extends="_base">
+                <property name="rate"/>
+            </fetchPlan>
+            <loader id="cadetDl">
+                <query>
+                    select e from Cadet e
                 </query>
             </loader>
         </collection>
@@ -44,29 +74,41 @@
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="fightAccountingDc">
             <column width="350px">
-                <entityPicker id="cadetField" property="cadet">
+                <entityComboBox id="cadetField" property="cadet"
+                                nullOptionVisible="false"
+                                dataContainer="fightAccountingDc"
+                                optionsContainer="cadetDc">
                     <actions>
-                        <action id="entityLookup" type="entity_lookup"/>
-                        <action id="entityClear" type="entity_clear"/>
+                        <action id="entityLookup" type="entity_lookup" icon="CREATE_ACTION"/>
                     </actions>
-                </entityPicker>
-                <entityPicker id="instructorField" property="instructor">
+                </entityComboBox>
+                <entityComboBox id="instructorField" property="instructor"
+                                nullOptionVisible="false"
+                                dataContainer="fightAccountingDc"
+                                optionsContainer="instructorDc">
                     <actions>
-                        <action id="entityLookup" type="entity_lookup"/>
-                        <action id="entityClear" type="entity_clear"/>
+                        <action id="entityLookup" type="entity_lookup" icon="CREATE_ACTION"/>
                     </actions>
-                </entityPicker>
+                </entityComboBox>
                 <dateField id="flightDateField" property="flightDate"/>
                 <textField id="flightTimeField" property="flightTime"/>
-                <entityPicker id="airplainField" property="airplain">
+                <entityComboBox id="airplainField" property="airplain"
+                                nullOptionVisible="false"
+                                dataContainer="fightAccountingDc"
+                                optionsContainer="planDC">
                     <actions>
-                        <action id="entityLookup" type="entity_lookup"/>
-                        <action id="entityClear" type="entity_clear"/>
+                        <action id="entityLookup" type="entity_lookup" icon="CREATE_ACTION"/>
                     </actions>
-                </entityPicker>
-                <comboBox id="flightTypeField"
+                </entityComboBox>
+                <entityComboBox id="flightTypeField"
                           nullOptionVisible="false"
-                          property="flightType"/>
+                                dataContainer="fightAccountingDc"
+                                optionsContainer="flightTypesDc"
+                          property="flightType">
+                    <actions>
+                        <action id="entity_lookup" type="entity_lookup" icon="CREATE_ACTION"/>
+                    </actions>
+                </entityComboBox>
             </column>
         </form>
         <hbox id="editActions" spacing="true">
